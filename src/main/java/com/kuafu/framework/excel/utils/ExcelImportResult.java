@@ -12,6 +12,8 @@ public class ExcelImportResult<T> {
 
     private List<FieldError> errorList = new ArrayList<FieldError>();
 
+    private boolean hasNext = Boolean.TRUE;
+
     public ExcelImportResult() {
 
     }
@@ -46,6 +48,14 @@ public class ExcelImportResult<T> {
 
     public boolean isFailed(){
         return !this.errorList.isEmpty();
+    }
+
+    public boolean isHasNext() {
+        return hasNext;
+    }
+
+    public void setHasNext(boolean hasNext) {
+        this.hasNext = hasNext;
     }
 
     public static class FieldError {

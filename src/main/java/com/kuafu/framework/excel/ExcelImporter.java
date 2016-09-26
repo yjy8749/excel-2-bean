@@ -129,8 +129,8 @@ public class ExcelImporter<T> {
     public ExcelImportResult<T> readToList(Integer size) throws Exception {
 
         ExcelImportResult<T> result = new ExcelImportResult<T>();
-
-        while (this.reader.readRecord()) {
+        result.setHasNext(this.reader.readRecord());
+        while (result.isHasNext()) {
             try {
                 if (StringUtils.isNotEmpty(StringUtils.join(this.reader.getValues(), ""))){
                     T obj = reflectBean.newInstance();
@@ -158,8 +158,8 @@ public class ExcelImporter<T> {
             if(size!=null&&(result.getResults().size()+result.getErrorList().size())>=size){
                 break;
             }
+            result.setHasNext(this.reader.readRecord());
         }
-
         return result;
     }
 
